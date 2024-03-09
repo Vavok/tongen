@@ -8,7 +8,6 @@ wton=[]
 with open('wton.txt', 'r') as file:
     for line in file:
         wton.append(line.strip())
-
 def export_mnemonic(file):
     with open(file, 'r') as file:
         first_line = file.readline()
@@ -17,14 +16,16 @@ def export_mnemonic(file):
     return wallet_mnemonics
 
 start_time=time.time()
-test = ['VAVOK','VAV0k','BTC','TON','T0N','GRAM','vavok']
+test = ['VAVOK','VAV0k','BTC','TON','T0N','GRAM','vavok','ALVI','alvi','Alvi','AlVi']
 a=['UQCqPdkvuiXF79L2YdyYJlKAMztkfAnjae4bwgGGVHvQB_Am',
    'EQCiLN0gEiZqthGy-dKl4pi4kqWJWjRzR3Jv4jmPOtQHveDN',
    'EQC10L__G2SeEeM2Lw9osGyYxhoIPqJwE-8Pe7728JcmnJzW',
    'EQCfwe95AJDfKuAoP1fBtu-un1yE7Mov-9BXaFM3lrJZwqg_',
    'UQCtiv7PrMJImWiF2L5oJCgPnzp-VML2CAt5cbn1VsKAxOVB',
    ]
-test=test+a+wton
+
+wton=wton+a
+test=test
 #print(test)
 def start(i):
     wallet_workchain = 0
@@ -52,6 +53,7 @@ def start(i):
                         f.write(f"{address} : {seeds}  : №{i.value} {speed}h/s \n")
                     print(i.value, address, seeds, speed, 'h/s')
         proverka(address, test, 'tonb.txt')
+        proverka(address, wton, 'ton.txt')
         i.value += 1
         # if i.value % 1000 == 0:
         #     end = time.time() - start_time
@@ -65,6 +67,7 @@ if __name__ == "__main__":
     processes = []
     i = Value('i', 0)
     for n in range(4):
+        print(f'Cтарт {n+1}')
         p = Process(target=start, args=(i,))
         processes.append(p)
         p.start()
