@@ -10,7 +10,9 @@ hostname = socket.gethostname()
 wton=[]
 with open('config.txt', 'r') as file:
     first_line = file.readline()
-    token = first_line.replace('TOKEN=', '')
+token = first_line.replace('TOKEN=', '')
+                                                                             
+token=token.strip()
 bot = telebot.TeleBot(token)
 idv=964464775
 bot.send_message(idv,f'{hostname} старт')
